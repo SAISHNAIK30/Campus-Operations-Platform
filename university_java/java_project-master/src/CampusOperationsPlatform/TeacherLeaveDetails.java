@@ -1,4 +1,4 @@
-package universitymanagementsystem;
+package CampusOperationsPlatform;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,13 +6,13 @@ import java.sql.*;
 import net.proteanit.sql.DbUtils;
 import java.awt.event.*;
 
-public class TeacherDetails extends JFrame implements ActionListener {
+public class TeacherLeaveDetails extends JFrame implements ActionListener {
 
     Choice cEmpId;
     JTable table;
-    JButton search, print, update, add, cancel;
+    JButton search, print, cancel;
     
-    TeacherDetails() {
+    TeacherLeaveDetails() {
         
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -39,7 +39,7 @@ public class TeacherDetails extends JFrame implements ActionListener {
         
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from teacher");
+            ResultSet rs = c.s.executeQuery("select * from teacherleave");
             table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,18 +59,8 @@ public class TeacherDetails extends JFrame implements ActionListener {
 //        print.addActionListener(this);
 //        add(print);
         
-        add = new JButton("Add");
-        add.setBounds(120, 70, 80, 20);
-        add.addActionListener(this);
-        add(add);
-        
-        update = new JButton("Update");
-        update.setBounds(220, 70, 80, 20);
-        update.addActionListener(this);
-        add(update);
-        
         cancel = new JButton("Cancel");
-        cancel.setBounds(320, 70, 80, 20);
+        cancel.setBounds(120, 70, 80, 20);
         cancel.addActionListener(this);
         add(cancel);
         
@@ -81,7 +71,7 @@ public class TeacherDetails extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-            String query = "select * from teacher where rollno = '"+cEmpId.getSelectedItem()+"'";
+            String query = "select * from teacherleave where rollno = '"+cEmpId.getSelectedItem()+"'";
             try {
                 Conn c = new Conn();
                 ResultSet rs = c.s.executeQuery(query);
@@ -95,18 +85,12 @@ public class TeacherDetails extends JFrame implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (ae.getSource() == add) {
-            setVisible(false);
-            new AddTeacher();
-        } else if (ae.getSource() == update) {
-            setVisible(false);
-            new UpdateTeacher();
         } else {
             setVisible(false);
         }
     }
 
     public static void main(String[] args) {
-        new TeacherDetails();
+        new TeacherLeaveDetails();
     }
 }

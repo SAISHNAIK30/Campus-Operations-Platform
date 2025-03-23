@@ -1,4 +1,4 @@
-//package universitymanagementsystem;
+//package CampusOperationsPlatform;
 //
 //import javax.swing.*;
 //import java.awt.*;
@@ -67,7 +67,7 @@
 //    }
 //}
 
-package universitymanagementsystem;
+package CampusOperationsPlatform;
 
 import javax.swing.*;
 import java.awt.*;

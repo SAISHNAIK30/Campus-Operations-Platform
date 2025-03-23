@@ -1,5 +1,5 @@
 
-package universitymanagementsystem;
+package CampusOperationsPlatform;
 
 import java.awt.Image;
 import java.awt.Component;

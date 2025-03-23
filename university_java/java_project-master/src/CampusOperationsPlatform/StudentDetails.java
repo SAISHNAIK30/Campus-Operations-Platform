@@ -1,4 +1,4 @@
-package universitymanagementsystem;
+package CampusOperationsPlatform;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,30 +6,30 @@ import java.sql.*;
 import net.proteanit.sql.DbUtils;
 import java.awt.event.*;
 
-public class TeacherLeaveDetails extends JFrame implements ActionListener {
+public class StudentDetails extends JFrame implements ActionListener {
 
-    Choice cEmpId;
+    Choice crollno;
     JTable table;
-    JButton search, print, cancel;
+    JButton search, print, update, add, cancel;
     
-    TeacherLeaveDetails() {
+    StudentDetails() {
         
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         
-        JLabel heading = new JLabel("Search by Employee Id");
+        JLabel heading = new JLabel("Search by Roll Number");
         heading.setBounds(20, 20, 150, 20);
         add(heading);
         
-        cEmpId = new Choice();
-        cEmpId.setBounds(180, 20, 150, 20);
-        add(cEmpId);
+        crollno = new Choice();
+        crollno.setBounds(180, 20, 150, 20);
+        add(crollno);
         
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from teacher");
+            ResultSet rs = c.s.executeQuery("select * from student");
             while(rs.next()) {
-                cEmpId.add(rs.getString("empId"));
+                crollno.add(rs.getString("rollno"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener {
         
         try {
             Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from teacherleave");
+            ResultSet rs = c.s.executeQuery("select * from student");
             table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,8 +59,18 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener {
 //        print.addActionListener(this);
 //        add(print);
         
+        add = new JButton("Add");
+        add.setBounds(120, 70, 80, 20);
+        add.addActionListener(this);
+        add(add);
+        
+        update = new JButton("Update");
+        update.setBounds(220, 70, 80, 20);
+        update.addActionListener(this);
+        add(update);
+        
         cancel = new JButton("Cancel");
-        cancel.setBounds(120, 70, 80, 20);
+        cancel.setBounds(320, 70, 80, 20);
         cancel.addActionListener(this);
         add(cancel);
         
@@ -71,7 +81,7 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-            String query = "select * from teacherleave where rollno = '"+cEmpId.getSelectedItem()+"'";
+            String query = "select * from student where rollno = '"+crollno.getSelectedItem()+"'";
             try {
                 Conn c = new Conn();
                 ResultSet rs = c.s.executeQuery(query);
@@ -85,12 +95,18 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (ae.getSource() == add) {
+            setVisible(false);
+            new AddStudent();
+        } else if (ae.getSource() == update) {
+            setVisible(false);
+            new UpdateStudent();
         } else {
             setVisible(false);
         }
     }
 
     public static void main(String[] args) {
-        new TeacherLeaveDetails();
+        new StudentDetails();
     }
 }
