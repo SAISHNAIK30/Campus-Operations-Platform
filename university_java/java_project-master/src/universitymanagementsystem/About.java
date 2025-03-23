@@ -1,4 +1,4 @@
-package universitymanagementsystem;
+package CampusOperationsPlatform;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class About extends JFrame {
         image.setBounds(350, 0, 300, 200);
         add(image);
         
-        JLabel heading = new JLabel("<html>University<br/>Management System</html>");
+        JLabel heading = new JLabel("<html>CampusOperationsPlatform</html>");
         heading.setBounds(70, 20, 300, 130);
         heading.setFont(new Font("Tahoma", Font.BOLD, 30));
         add(heading);
